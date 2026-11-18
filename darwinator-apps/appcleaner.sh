@@ -9,7 +9,7 @@ rm -rf "$WORK" "$HOME/.Trash"; mkdir -p "$WORK"
 mkdir -p "$L/Preferences" "$L/Caches/$ID" "$L/Application Support/$NAME" "$L/Saved Application State/$ID.savedState"
 echo p > "$L/Preferences/$ID.plist"; echo c > "$L/Caches/$ID/cache.db"; echo s > "$L/Application Support/$NAME/state.json"; echo x > "$L/Saved Application State/$ID.savedState/windows.plist"
 sh /usr/local/libexec/wrapapp.sh "$APP" "$WORK" "$MACHRUN" > /dev/null || { echo "FAIL the application could not be wrapped"; exit 1; }
-export WS_SOCKET=/var/run/WindowServer.sock XDG_SESSION_TYPE=wsd XDG_CURRENT_DESKTOP=Aqua XDG_SESSION_DESKTOP=Aqua LANG=C.UTF-8 MACHRUN_SHOWWINDOWS=1 MACHRUN_OPENFILE="$TARGET"
+export WS_SOCKET=/var/run/WindowServer.sock XDG_SESSION_TYPE=WindowServer XDG_CURRENT_DESKTOP=Aqua XDG_SESSION_DESKTOP=Aqua LANG=C.UTF-8 MACHRUN_SHOWWINDOWS=1 MACHRUN_OPENFILE="$TARGET"
 export MACHRUN_KVC=mainWindowController.uninstallViewController.bundles.relatedFiles.path MACHRUN_KVC_DELAY=45
 export MACHRUN_INVOKE='mainWindowController.uninstallViewController remove:' MACHRUN_INVOKE_DELAY=55
 [ -n "$MACHRUN_COMPAT" ] && export MACHRUN_COMPAT

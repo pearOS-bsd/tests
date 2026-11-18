@@ -9,7 +9,7 @@ WORK="${WORK:-/var/tmp/unartest}"; MACHRUN="${MACHRUN:-/usr/local/bin/machrun}";
 ok() { echo "ok   $1"; pass=$((pass + 1)); }; bad() { echo "FAIL $1"; fail=$((fail + 1)); }
 rm -rf "$WORK"; mkdir -p "$WORK/cache"; cp -R "$DATA"/. "$WORK/"
 sh /usr/local/libexec/wrapapp.sh "$APP" "$WORK/cache" "$MACHRUN" > /dev/null || { echo "FAIL the application could not be wrapped"; exit 1; }
-export WS_SOCKET=/var/run/WindowServer.sock MALLOC_CONF=junk:false,zero:true MACHRUN_IMMORTAL_STRINGS=1   # (not XDG_SESSION_TYPE=wsd etc., which the AppCleaner test sets)
+export WS_SOCKET=/var/run/WindowServer.sock MALLOC_CONF=junk:false,zero:true MACHRUN_IMMORTAL_STRINGS=1   # (not XDG_SESSION_TYPE=WindowServer etc., which the AppCleaner test sets)
 [ -n "$MACHRUN_COMPAT" ] && export MACHRUN_COMPAT
 ulimit -c 0
 for a in t1.zip t2.tar.gz t3.tar.bz2 t4.tar.xz t5.7z; do

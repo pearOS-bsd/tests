@@ -21,7 +21,7 @@ static id sT;
 - (void)mouseDown:(NSEvent *)e { on = !on; fprintf(stderr, "open-hello: mouseDown at %g,%g\n", e ? [e locationInWindow].x : -1, e ? [e locationInWindow].y : -1); [self setNeedsDisplay:YES]; }
 - (void)keyDown:(NSEvent *)e { fprintf(stderr, "open-hello: keyDown %d chars='%s'\n", (int)[e keyCode], [[e characters] UTF8String]); }
 - (void)drawRect:(CGRect)r { [(on ? [NSColor greenColor] : [NSColor yellowColor]) setFill]; NSRectFill([self bounds]); [[NSColor redColor] setFill]; NSRectFill(CGRectMake(20, 20, 120, 60));
-  [@"open: AppKit on wsd" drawAtPoint:CGPointMake(20, 200) withAttributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:28], NSForegroundColorAttributeName: [NSColor blackColor] }]; }
+  [@"open: AppKit on WindowServer" drawAtPoint:CGPointMake(20, 200) withAttributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:28], NSForegroundColorAttributeName: [NSColor blackColor] }]; }
 @end
 int main(void) { @autoreleasepool {
   NSApplication *a = [NSApplication sharedApplication];

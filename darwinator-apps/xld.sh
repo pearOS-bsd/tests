@@ -9,7 +9,7 @@ rm -rf "$WORK"; mkdir -p "$WORK"
 le32() { printf "\\$(printf '%03o' $(($1 & 255)))\\$(printf '%03o' $((($1 >> 8) & 255)))\\$(printf '%03o' $((($1 >> 16) & 255)))\\$(printf '%03o' $((($1 >> 24) & 255)))"; }
 { printf 'RIFF'; le32 $((36 + 176400)); printf 'WAVEfmt '; le32 16; printf '\001\000\002\000'; le32 44100; le32 176400; printf '\004\000\020\000'; printf 'data'; le32 176400; head -c 176400 /dev/urandom; } > "$WORK/in.wav"
 sh "$WRAP" "$APP" "$WORK" "$MACHRUN" > /dev/null || { echo "FAIL XLD could not be wrapped"; exit 1; }
-export WS_SOCKET=/var/run/WindowServer.sock XDG_SESSION_TYPE=wsd XDG_CURRENT_DESKTOP=Aqua XDG_SESSION_DESKTOP=Aqua LANG=C.UTF-8
+export WS_SOCKET=/var/run/WindowServer.sock XDG_SESSION_TYPE=WindowServer XDG_CURRENT_DESKTOP=Aqua XDG_SESSION_DESKTOP=Aqua LANG=C.UTF-8
 [ -n "$MACHRUN_COMPAT" ] && export MACHRUN_COMPAT
 ulimit -c 0; cd "$WORK/$(basename "$APP")" || exit 1
 timeout -s KILL "${TIMEOUT:-90}" ./XLD --cmdline -f flac -o "$WORK/out.flac" "$WORK/in.wav" > "$WORK/log1" 2>&1
